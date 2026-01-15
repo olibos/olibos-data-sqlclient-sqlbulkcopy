@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Olibos.Data.SqlClient.SqlBulkCopy</name>
+    </assembly>
+    <members>
+        <member name="T:Olibos.Data.SqlClient.SqlBulkCopy.SqlBulkCopySourceGenerator">
+             <summary>
+             A Roslyn incremental source generator that automatically creates optimized SQL bulk copy adapters for classes decorated with the <see cref="F:Olibos.Data.SqlClient.SqlBulkCopy.SqlBulkCopySourceGenerator.SqlBulkCopyAttribute"/>.
+             </summary>
+             <remarks>
+             <para>
+             This generator analyzes the compilation for classes annotated with <see cref="F:Olibos.Data.SqlClient.SqlBulkCopy.SqlBulkCopySourceGenerator.SqlBulkCopyAttribute"/> and generates extension methods
+             on Microsoft.Data.SqlClient.SqlBulkCopy that accept IAsyncEnumerable{T} of the annotated class.
+             </para>
+             <para>
+             For each annotated class, the generator:
+             <list type="number">
+               <item><description>Extracts public properties from the class using semantic analysis</description></item>
+               <item><description>Generates a custom <see cref="T:System.Data.Common.DbDataReader"/> implementation</description></item>
+               <item><description>Creates an extension method <c>WriteToServerAsync</c> for seamless bulk copying</description></item>
+             </list>
+             </para>
+             <para>
+             The generated code is fully async-compatible and supports cancellation tokens for long-running operations.
+             </para>
+             </remarks>
+             <example>
+             <code>
+             [SqlBulkCopy]
+             public class Product
+             {
+                 public int Id { get; set; }
+                 public string Name { get; set; }
+                 public decimal Price { get; set; }
+             }
+            
+             // Generated extension method becomes available:
+             // public static async Task WriteToServerAsync(
+             //     this SqlBulkCopy sql,
+             //     IAsyncEnumerable&lt;Product&gt; items,
+             //     CancellationToken cancellationToken = default)
+            
+             var bulkCopy = new SqlBulkCopy(connection) { DestinationTableName = "dbo.Products" };
+             await bulkCopy.WriteToServerAsync(GetProductsAsync());
+             </code>
+             </example>
+        </member>
+        <member name="M:Olibos.Data.SqlClient.SqlBulkCopy.SqlBulkCopySourceGenerator.Initialize(Microsoft.CodeAnalysis.IncrementalGeneratorInitializationContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Olibos.Data.SqlClient.SqlBulkCopy.SqlBulkCopySourceGenerator.GetClassDeclarationForSourceGen(Microsoft.CodeAnalysis.GeneratorSyntaxContext)">
+            <summary>
+            Checks whether the Node is annotated with the [SqlBulkCopy] attribute and maps syntax context to the specific node type (ClassDeclarationSyntax).
+            </summary>
+            <param name="context">Syntax context, based on CreateSyntaxProvider predicate.</param>
+            <returns>The specific cast and whether the attribute was found.</returns>
+        </member>
+        <member name="M:Olibos.Data.SqlClient.SqlBulkCopy.SqlBulkCopySourceGenerator.GenerateCode(Microsoft.CodeAnalysis.SourceProductionContext,Microsoft.CodeAnalysis.Compilation,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax})">
+            <summary>
+            Generate code action.
+            It will be executed on specific nodes (ClassDeclarationSyntax annotated with the [SqlBulkCopy] attribute) changed by the user.
+            </summary>
+            <param name="context">Source generation context used to add source files.</param>
+            <param name="compilation">Compilation used to provide access to the Semantic Model.</param>
+            <param name="classDeclarations">Nodes annotated with the [SqlBulkCopy] attribute that trigger the generate action.</param>
+        </member>
+    </members>
+</doc>

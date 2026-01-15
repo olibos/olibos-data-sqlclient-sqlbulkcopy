@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>true</IsPackable>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+
+        <RootNamespace>Olibos.Data.SqlClient.SqlBulkCopy</RootNamespace>
+        <PackageId>Olibos.Data.SqlClient.SqlBulkCopy</PackageId>
+        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+        <NoWarn>$(NoWarn)SA1101;SA1501;SA1503;</NoWarn>
+
+        <!-- NuGet Package Metadata -->
+        <Version>1.0.0</Version>
+        <Title>SqlBulkCopy Source Generator using IAsyncEnumerable&lt;T&gt;</Title>
+        <Description>A high-performance C# source generator that automatically creates SQL bulk copy adapters for your domain models. Eliminates boilerplate code and enables seamless bulk data insertion into SQL Server using IAsyncEnumerable&lt;T&gt;.</Description>
+        <Authors>Olibos</Authors>
+        <PackageProjectUrl>https://github.com/olibos/Olibos.Data.SqlClient.SqlBulkCopy</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/olibos/Olibos.Data.SqlClient.SqlBulkCopy</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>roslyn;source-generator;sqlbulkcopy;sql-server;code-generation</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <!-- Analyzer Configuration -->
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IsRoslynAnalyzer>true</IsRoslynAnalyzer>
+        <DevelopmentDependency>true</DevelopmentDependency>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.18.0.131500">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="stylecop.json" />
+    </ItemGroup>
+
+    <!-- Include the generated DLL and documentation in the analyzers folder -->
+    <ItemGroup>
+        <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="$(OutputPath)$(AssemblyName).xml" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+
+    <!-- Include README in package -->
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\" Visible="false" />
+    </ItemGroup>
+
+</Project>

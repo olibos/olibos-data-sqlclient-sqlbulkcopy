@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Olibos.Data.SqlClient.SqlBulkCopy/Olibos.Data.SqlClient.SqlBulkCopy.Sample/Olibos.Data.SqlClient.SqlBulkCopy.Sample.csproj" />
+  <Project Path="Olibos.Data.SqlClient.SqlBulkCopy/Olibos.Data.SqlClient.SqlBulkCopy.Tests/Olibos.Data.SqlClient.SqlBulkCopy.Tests.csproj" />
+  <Project Path="Olibos.Data.SqlClient.SqlBulkCopy/Olibos.Data.SqlClient.SqlBulkCopy/Olibos.Data.SqlClient.SqlBulkCopy.csproj" />
+</Solution>
