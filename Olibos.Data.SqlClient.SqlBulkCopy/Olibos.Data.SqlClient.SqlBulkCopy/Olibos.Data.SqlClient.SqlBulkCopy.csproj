@@ -19,8 +19,8 @@
         <Title>SqlBulkCopy Source Generator using IAsyncEnumerable&lt;T&gt;</Title>
         <Description>A high-performance C# source generator that automatically creates SQL bulk copy adapters for your domain models. Eliminates boilerplate code and enables seamless bulk data insertion into SQL Server using IAsyncEnumerable&lt;T&gt;.</Description>
         <Authors>Olibos</Authors>
-        <PackageProjectUrl>https://github.com/olibos/Olibos.Data.SqlClient.SqlBulkCopy</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/olibos/Olibos.Data.SqlClient.SqlBulkCopy</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/olibos/olibos-data-sqlclient-sqlbulkcopy</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/olibos/olibos-data-sqlclient-sqlbulkcopy</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>roslyn;source-generator;sqlbulkcopy;sql-server;code-generation</PackageTags>
